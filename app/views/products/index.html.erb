@@ -1,7 +1,24 @@
-<% @products.each do |product| %>
-<p>Name:<%=  product.name %></p>
-<p>Price: <%=  product.price %></p>
-<p>Image: <%=  product.image %></p>
-<p>Description: <%=  product.description %></p>
-<p>----</p>
+<% @products.each_slice(3) do |three_products| %>
+  <div class="row">
+    <% three_products.each do |product| %>
+      <div class = "col-md-4">
+       <div class="well">
+        <h1>
+          <a href="/products/<%= product.id %>">
+          <%= product.name %>
+          </a>
+        </h1>
+        <p>Price: <%=  number_to_currency(product.price, unit: "Rupees", format: "%n %u") %></p>
+        <p><%= product.sale_message %></p>
+        <p>Tax: <%= product.tax %></p>
+        <p>Total: <%= product.total %></p>
+        <p>Description: <%=  product.description %></p>
+          <p>Added on:</p>
+          <%= product.friendly_time %>
+        <img src = "<%=  product.image %>" alt="<%= product.name %>">
+          <%= link_to "Delete Product Please", "/products/#{product.id}", method: :delete %>
+      </div>
+    </div>
+<% end %>
+</div>
 <% end %>
