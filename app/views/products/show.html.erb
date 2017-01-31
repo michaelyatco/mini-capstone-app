@@ -1,5 +1,9 @@
 <p>Name: <%= @product.name %></p>
 <p>Price: <%= number_to_currency(@product.price, unit: "Rupees", format: "%n %u") %></p>
-<p>Image: <img src = <%= @product.image %>></p>
+<p>Images:</p>
+<% @product.images.each do |image| %>
+  <p> <img src = <%= image.url %>></p>
+<% end %>
 <p>Description: <%= @product.description %></p>
+<p>Supplier: <%= @product.supplier.name %></p>
 <%= link_to "Delete Product Please", "/products/#{@product.id}", method: :delete %>

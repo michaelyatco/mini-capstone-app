@@ -1,4 +1,7 @@
 class Product < ApplicationRecord
+  belongs_to :supplier 
+  has_many :images
+  
   def friendly_time
     created_at.strftime("%b %d, %Y")
   end
