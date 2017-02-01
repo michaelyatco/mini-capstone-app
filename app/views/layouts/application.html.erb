@@ -53,11 +53,18 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Item Query <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><%=link_to "Add item", "/products/new", method: :get%></a></li>
-            <!-- <li><a href="/products?sort=price">Sort by Price(Low to High)</a></li>
-            <li><a href="/products?sort=price&order=desc">Sort by Price(High to Low)</a></li>
+            <% if current_user %>
+              <li><%= link_to "Log Out!", "/logout", class: "h1" %></li>
+            <% else %>
+            <li><a href="/login">Log In!</a></li>
+            <li><a href="/signup">Sign Up!</a></li>
+            <% end %>
             <li role="separator" class="divider"></li>
-            <li><a href="/products?discount=100">Discount items</a></li> -->
+              <li><%=link_to "Add item", "/products/new", method: :get%></a></li>
+                <li><a href="/products?sort=price">Sort by Price(Low to High)</a></li>
+                <li><a href="/products?sort=price&order=desc">Sort by Price(High to Low)</a></li>
+                <li role="separator" class="divider"></li>
+            <li><a href="/products?discount=100">Discount items</a></li>
           </ul>
         </li>
       </ul>
