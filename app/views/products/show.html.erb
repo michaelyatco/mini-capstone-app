@@ -7,3 +7,12 @@
 <p>Description: <%= @product.description %></p>
 <p>Supplier: <%= @product.supplier.name %></p>
 <%= link_to "Delete Product Please", "/products/#{@product.id}", method: :delete %>
+
+<%= form_tag "/orders", method: :post do %>
+  <div>
+    <input type="text" name="quantity" value="number">
+  </div>
+  <div>
+    <input type="submit" value="Buy Now!">
+  </div>
+<% end %>
