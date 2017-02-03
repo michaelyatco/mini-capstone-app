@@ -9,10 +9,19 @@
 <%= link_to "Delete Product Please", "/products/#{@product.id}", method: :delete %>
 
 <%= form_tag "/orders", method: :post do %>
+ <div>
+  <% if current_user %>
   <div>
-    <input type="text" name="quantity" value="number">
+  Quantity:
+    <input type="number" name="quantity">
   </div>
   <div>
+  Product ID: <%= @product.id %>
+    <input type="hidden" name="product_id" value="<%= @product.id %>">
+  </div>
+    <div>
     <input type="submit" value="Buy Now!">
+  </div>
+  <% end %>
   </div>
 <% end %>
