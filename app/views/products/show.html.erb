@@ -12,8 +12,11 @@
 </ul>
 <p>Description: <%= @product.description %></p>
 <p>Supplier: <%= @product.supplier.name %></p>
-<%= link_to "Delete Product Please", "/products/#{@product.id}", method: :delete %>
-
+<p>Amount: <%= @product.amount %></p>
+<% if current_user && current_user.admin %>
+<%= link_to "Edit Product", "/products/#{@product.id}/edit", class: "btn btn-success" %>
+<%= link_to "Delete Product", "/products/#{@product.id}", method: :delete, class: "btn btn-danger" %>
+<% end %>
 <%= form_tag "/carted_products", method: :post do %>
  <div>
   <% if current_user %>

@@ -1,4 +1,6 @@
 class ProductsController < ApplicationController
+  # before_action :authenticate_admin!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :authenticate_admin!, except: [:index, :show]
 
   def index
     sort_attribute = params[:sort]
@@ -21,24 +23,22 @@ class ProductsController < ApplicationController
   end
 
   def new
-    if current_user && current_user.admin
+    @product = Product.new
       render "new.html.erb"
-    else
-      flash[:warning] = "Admins only. Get out!"
-      redirect_to "/login"
-    end
   end
 
   def create
-    if current_user && current_user.admin
-      @product = Product.create(name: params[:name], price: params[:price], image: params[:image], description: params[:description], supplier_id: params[:supplier_id])
-      flash[:success] = "Item has been created!"
-      flash[:info] = "The item that has been created was #{@product.id}"
-      redirect_to "/products/#{@product.id}"
-    else
-      flash[:warning] = "Admins only. Get out!"
-      redirect_to "/login"
-    end    
+      @product = Product.new(name: params[:name], price: params[:price], description: params[:description], supplier_id: params[:supplier_id], amount: params[:amount])
+
+      if @product.save
+        @product.images.create(url: params[:image])
+        flash[:success] = "Item has been created!"
+        flash[:info] = "The item that has been created was #{@product.id}"
+        redirect_to "/products/#{@product.id}"  
+      else
+        render "new.html.erb"
+      end
+
   end
 
   def show
@@ -51,40 +51,30 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    if current_user && current_user.admin
       @product = Product.find_by(id: params[:id])
       render "edit.html.erb"
-    else
-      flash[:warning] = "Admins only. Get out!"
-      redirect_to "/login"
-    end
   end
 
   def update
-    if current_user && current_user.admin
       @product = Product.find_by(id: params[:id])
-      @product.assign_attributes(name: params[:name], price: params[:price], image: params[:images], description: params[:description], supplier_id: params[:supplier_id])
-      @product.save
-      flash[:success] = "Item has been updated!"
-      flash[:info] = "The item that has been updated was #{@product.id}"
-      redirect_to "/products/#{@product.id}"
-    else
-      flash[:warning] = "Admins only. Get out!"
-      redirect_to "/login"
-    end
+      @product.assign_attributes(name: params[:name], price: params[:price], description: params[:description], supplier_id: params[:supplier_id], amount: params[:amount])
+
+      if @product.save
+        @product.images.create(url: params[:images])
+        flash[:success] = "Item has been updated!"
+        flash[:info] = "The item that has been updated was #{@product.id}"
+        redirect_to "/products/#{@product.id}"
+      else
+        render "edit.html.erb"
+      end
   end
 
   def destroy
-    if current_user && current_user.admin
       @product = Product.find_by(id: params[:id])
       @product.destroy
       flash[:danger] = "Item has been deleted!"
       flash[:warning] = "The item that has been deleted was #{@product.id}"
       redirect_to "/products"
-    else
-      flash[:warning] = "Admins only. Get out!"
-      redirect_to "/login"
-    end
   end
 
 end

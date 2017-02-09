@@ -65,6 +65,10 @@
               Category: <%= category.name.capitalize %>
               </a></li>
               <% end %>
+          <li role="separator" class="divider"></li>
+            <% if current_user && current_user.admin? %>
+            <li><%= link_to "Create new item!", "/products/new" %></li>
+          <% end %>
           </ul>
         </li>
       </ul>

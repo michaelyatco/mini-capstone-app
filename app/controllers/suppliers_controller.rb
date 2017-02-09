@@ -22,7 +22,7 @@ def index
   end
 
   def create
-    @supplier = Supplier.create(name: params[:name], price: params[:price], image: params[:image], description: params[:description], supplier_id: params[:supplier_id])
+    @supplier = Supplier.create(name: params[:name], price: params[:price], image: params[:image], description: params[:description], supplier_id: params[:supplier_id], amount: params[:amount])
     flash[:success] = "Item has been created!"
     flash[:info] = "The item that has been created was #{@supplier.id}"
     redirect_to "/suppliers/#{@supplier.id}"
@@ -44,7 +44,7 @@ def index
 
   def update
     @supplier = Supplier.find_by(id: params[:id])
-    @supplier.assign_attributes(name: params[:name], price: params[:price], image: params[:images], description: params[:description], supplier_id: params[:supplier_id])
+    @supplier.assign_attributes(name: params[:name], price: params[:price], image: params[:images], description: params[:description], supplier_id: params[:supplier_id], amount: params[:amount])
     @supplier.save
     flash[:success] = "Item has been updated!"
     flash[:info] = "The item that has been updated was #{@supplier.id}"

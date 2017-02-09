@@ -15,10 +15,10 @@
             <p>Tax: <%= product.tax %></p>
             <p>Total: <%= product.total %></p>
             <p>Description: <%=  product.description %></p>
+            <p>Amount: <%= product.amount %></p>
             <p>Added on:</p>
               <%= product.friendly_time %>
             <img src = "<%=  product.images.first.url %>" alt="<%= product.name %>">
-            <%= link_to "Delete Product Please", "/products/#{product.id}", method: :delete %>
         </div>
       </div>
     <% end %>
