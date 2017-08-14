@@ -1,24 +1,15 @@
-# README
+# Mini-Capstone App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Ruby on Rails practice app featuring the original Legend of Zelda NES-version as source material. Built within first month of coding.
 
-Things you may want to cover:
+## Purpose
 
-* Ruby version
+* Demonstrating proficiency with constructing a Rails app from scratch.
+* Creating controllers, models, views, and routes.
+* DB migrating store items data into the schema.
+* Creating a PostgreSQL database to store item data.
+* Adapting the app to diffentiate the UI between regular customers and the admins.
 
-* System dependencies
+## Built With
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* [Sublime]-(https://www.sublimetext.com/) - The text editor used
